@@ -5,6 +5,6 @@ const router = express.Router();
 const userLogin = require("./app/useCases/Users/UserCreate");
 
 // Route Users
-router.post("/api/createUser", userLogin);
+router.post("/api/user", userLogin);
 
 module.exports = router;
