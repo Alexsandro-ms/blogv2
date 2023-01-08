@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 const connetion = require("../../utils/connetionDatabase");
 
+const PostModel = require("./PostModel");
+
 const UserModel = connetion.define("users", {
   name: {
     type: Sequelize.STRING,
@@ -19,6 +21,8 @@ const UserModel = connetion.define("users", {
     allowNull: false
   }
 });
+
+UserModel.hasMany(PostModel);
 
 UserModel.sync();
 
