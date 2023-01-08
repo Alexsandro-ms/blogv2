@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {});
+// useCases
+const userLogin = require("./app/useCases/Users/UserCreate");
+
+// Route Users
+router.post("/api/createUser", userLogin);
 
 module.exports = router;
