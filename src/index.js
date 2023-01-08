@@ -1,5 +1,6 @@
 const express = require("express");
 const connetion = require("./utils/connetionDatabase");
+const session = require("express-session");
 
 const router = require("./routes");
 
@@ -10,6 +11,15 @@ connetion
   .then(() => {
     const app = express();
     const PORT = process.env.PORT || 8080;
+
+    app.use(
+      session({
+        secret: process.env.SESSIONSECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {maxAge: 18000000}
+      })
+    );
 
     app.use(express.json());
     app.use(router);
