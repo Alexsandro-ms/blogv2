@@ -5,15 +5,17 @@ const router = express.Router();
 const Authentication = require("./app/middleware/Auth");
 
 // useCases
+const postCreate = require("./app/useCases/Posts/PostCreate");
+const postList = require("./app/useCases/Posts/PostList");
 const userLogin = require("./app/useCases/Users/UserLogin");
 const userCreate = require("./app/useCases/Users/UserCreate");
-const postCreate = require("./app/useCases/Posts/PostCreate");
+
+// Posts Routes
+router.get("/api/post" /*Authentication, */);
+router.post("/api/post", postCreate /*Authentication, */);
 
 // User Routes
 router.post("/api/user/login", userLogin);
 router.post("/api/user", userCreate);
-
-// Posts Routes
-router.post("/api/post", postCreate /*Authentication, */);
 
 module.exports = router;
