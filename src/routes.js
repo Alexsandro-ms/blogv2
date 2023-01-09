@@ -4,14 +4,19 @@ const router = express.Router();
 // Middlewares
 const Authentication = require("./app/middleware/Auth");
 
-// useCases
+// ############## useCases ###############
+
+// Posts - useCases
 const postCreate = require("./app/useCases/Posts/PostCreate");
-const postList = require("./app/useCases/Posts/PostList");
+const postListByUserId = require("./app/useCases/Posts/PostListByUserId");
+// Users - useCases
 const userLogin = require("./app/useCases/Users/UserLogin");
 const userCreate = require("./app/useCases/Users/UserCreate");
 
+// ############ Routes ##############
+
 // Posts Routes
-router.get("/api/post" /*Authentication, */);
+router.get("/api/user/post", postListByUserId /*Authentication, */);
 router.post("/api/post", postCreate /*Authentication, */);
 
 // User Routes
