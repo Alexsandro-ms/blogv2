@@ -1,6 +1,6 @@
 const UserModel = require("../../models/UserModel");
-const session = require("express-session");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userLogin = (req, res) => {
   const { email, password } = req.body;
@@ -17,13 +17,24 @@ const userLogin = (req, res) => {
             user.password
           );
           if (passwordValidation) {
-            req.session.user = {
-              id: user.id,
-              email: user.email
-            };
-            return res
-              .status(200)
-              .json({ message: "User has been successfully logged in!" });
+            const jwtKey = process.env.JWTSECRET;
+            jwt.sign(
+              { id: user.id, name: user.name, email: user.email },
+              jwtKey,
+              {
+                expiresIn: "48h"
+              },
+              (err, token) => {
+                if (err) {
+                  return res.status(400).json({ message: "Internal error" });
+                } else {
+                  return res.status(200).json({
+                    message: "User has been successfully logged in!",
+                    token
+                  });
+                }
+              }
+            );
           } else {
             return res
               .status(401)
