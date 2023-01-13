@@ -28,10 +28,12 @@ const userLogin = (req, res) => {
                 if (err) {
                   return res.status(400).json({ message: "Internal error" });
                 } else {
-                  return res.status(200).json({
-                    message: "User has been successfully logged in!",
-                    token
-                  });
+                  return res
+                    .status(200)
+                    .json([
+                      { message: "User has been successfully logged in!" },
+                      token
+                    ]);
                 }
               }
             );
